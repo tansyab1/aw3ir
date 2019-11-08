@@ -1,52 +1,62 @@
 <!doctype html>
 <html>
 
-    <head>
-        <meta charset="utf-8" />
-        <link href="index.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="index.js"></script>
-    </head>
-    <h1>Saise d'une fiche "Personne"</h1>
-    <table style="width:25%">
-        <form action="page1.html" method="post">
-            <tr>
-                <p>
-                    <td><label for="nom" size="">Nom</label></td>
-                    <td><input type="text" id="nom" name="nom" placeholder="NGUYEN" value="" required/></td>
-                </p>
-            </tr>
-            <tr>
-                <p>
-                    <td><label for="prenom">Prenom</label></td>
-                    <td><input type="text" id="prenom" name="prenom" placeholder="TAN SY" value="" required/></td>
-                </p>
-            </tr>
-            <tr>
-                <p>
-                    <td><label for="date">Date de naisaance</label></td>
-                    <td><input type="date" id="date" name="date" placeholder="DD/MM/YYYY" value="" required/></td>
-                </p>
-            </tr>
-            <tr>
-                <p>
-                    <td><label for="addr">Address</label></td>
-                    <td><input type="text" id="addr" name="addr" placeholder="6 RUE JAMES WATT" value="" required/></td>
-                </p>
-            </tr>
-            <tr>
-                <p>
-                    <td><label for="mail">Mail</label></td>
-                    <td><input type="email" id="email" name="mail" placeholder="tansyab1@gmail.com" value="" required/></td>
-                </p>
-            </tr>
-            <td></td>
-            <td><button type="button" onclick="validation();">Valider</button></td>
-        </form>
-    </table>
-    
-    <div id="error"> </div>
-    <div id="resultat"> </div>
-    
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, 
+               initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<h1>Saise d'une fiche "Personne"</h1>
+<table style="width:25%">
+    <form action="page1.html" method="post">
+        <tr>
+            <p>
+                <td><label for="nom" size="">Nom</label></td>
+                <td><input type="text" id="nom" name="nom" placeholder="NGUYEN" autofocus="" required minlength="5"
+                        maxlength="20" /></td>
+            </p>
+        </tr>
+        <tr>
+            <p>
+                <td><label for="prenom">Prenom</label></td>
+                <td><input type="text" id="prenom" name="prenom" placeholder="TAN SY" autofocus="" required
+                        minlength="5" maxlength="20" /></td>
+            </p>
+        </tr>
+        <tr>
+            <p>
+                <td><label for="date">Date de naisaance</label></td>
+                <td><input type="date" id="date" name="date" placeholder="DD/MM/YYYY" autofocus="" required /></td>
+            </p>
+        </tr>
+        <tr>
+            <p>
+                <td><label for="addr">Address</label></td>
+                <td><input type="text" id="addr" name="addr" placeholder="6 RUE JAMES WATT" autofocus="" required
+                        minlength="5" maxlength="30" /></td>
+            </p>
+        </tr>
+        <tr>
+            <p>
+                <td><label for="mail">Mail</label></td>
+                <td><input type="email" id="email" name="mail" placeholder="tansyab1@gmail.com" autofocus="" required
+                        minlength="10" maxlength="50" /></td>
+            </p>
+        </tr>
+        <td></td>
+        <td><button type="button" onclick="validation();">Valider</button></td>
+    </form>
+</table>
+
+<div id="error"> </div>
+<div id="resultat"> </div>
+
+</body>
 
 </html>
