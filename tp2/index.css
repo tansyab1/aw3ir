@@ -22,10 +22,10 @@
 }
 
 body {
-  background: #92bde7;
+  background: #c6d6e6;
   color: #485e74;
   line-height: 1.6;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: cursive;
   padding: 1em;
 }
 
@@ -105,7 +105,7 @@ ul {
 
 .contact form button:hover,
 .contact form button:focus {
-  background: #92bde7;
+  background: #4d5052;
   color: #fff;
   outline: 0;
   transition: background-color 2s ease-out;
