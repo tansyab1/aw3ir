@@ -1,100 +1,102 @@
-<!doctype html>
 <html>
 
 <head>
-    <title> tp3 </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-1.12.4.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <!-- Place favicon.ico in the root directory -->
-
-    <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script>
-
-    <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-    <!--<link rel="stylesheet" href="style.css">-->
-    <!--<script src="main.js"></script>-->
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AW-Formulair v.2</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/index2.js"></script>
+	
 </head>
 
-<body>
-    <div class="container-fluid">
-        <h1>TP AW - Formulaire v2</h1>
-        <p> Avec Boostrap & jQuery</p>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="nom" class="col-sm-2 control-label">Nom</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nom" placeholder="">
-                </div>|
-            </div>
+<body >
+	<div style="background-color: white; margin: 20px 20px 0px 20px;" class="container-fluid">
+		<h1>TP AW - Formualire v2</h1>
+		<p>Avec Bootstrap & jQuery</p>
+		<hr>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="inputname" class="col-sm-2 control-label">Nom</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nom" placeholder="Nom">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputprenom" class="col-sm-2 control-label">Prenom</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="prenom" placeholder="Prenom">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputnaissance" class="col-sm-2 control-label">Date de naissance</label>
+				<div class="col-sm-10">
+					<input type="datetime" class="form-control" id="naissance" placeholder="JJ/MM/AAAA">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputadresse" class="col-sm-2 control-label">Adresse</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="adresse" placeholder="Adresse">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputemail" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="mail" class="form-control" id="email" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="button" class="btn btn-primary">Valider</button>
+				</div>
+			</div>
+		</form>
+		<!-- Modal Erreur-->
+		<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel1">Erreur</h4>
+					</div>
+					<div class="modal-body">
+						Veuillez remplir tous les champs svp
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal Bienvenue-->
+		<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel2"></h4>
+					</div>
+					<div class="modal-body">
+						<p id="modalP1">
+						</p>
+						<a href="" target="_blank"> <img src="" style="width:400"> </a>
+						<p id="modalP3">
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-            <div class="form-group">
-                <label for="prenom" class="col-sm-2 control-label">Prenom</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="prenom" placeholder="">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="date" class="col-sm-2 control-label">Date de naissance</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="datepicker" placeholder="JJ/MM/AAAA">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="addr" class="col-sm-2 control-label">Address</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="addr" placeholder="">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="mail" class="col-sm-2 control-label">Mail</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="mail" placeholder="">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button id="vaid" type="button" class="btn btn-primary" data-toggle="" data-target=""
-                        data-whatever="">Valider</button>
-                </div>
-            </div>
-
-        </form>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="lModal" tabindex="-1" role="dialog" aria-labelledby="lModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="lModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-                    <p id="modal1"></p>
-                    <a href="" target="_blank"><img src="" alt="" style="width:400" zoom=4></a>
-                    <div id="test"></div>
-                    <p id="modal3"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </body>
 
