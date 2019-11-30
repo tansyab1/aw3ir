@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $('#Valider').click(function () {
         if (($("#nom").val().length == 0) || ($("#prenom").val().length == 0) || ($("#naissance").val().length == 0 || ($("#adresse").val().length == 0) || ($("#email").val().length == 0))) {
             $('#alert').attr("class","alert alert-danger");
@@ -15,11 +16,12 @@ $(document).ready(function () {
             localStorage.setItem("form_adresse",$("#adresse").val());
             localStorage.setItem("form_email",$("#email").val());
             contactStore.add($("#nom").val(),$("#prenom").val(),$("#naissance").val(),$("#adresse").val(),$("#email").val())
-            //contactStore.getList();
-            for(var index in contactStore.getList()){
-                console.log(contactList[index].name);
+            contactList=contactStore.getList();
+            for(var index in contactList){
+                //console.log(contactList[index].name);
                 document.querySelector("table tbody").innerHTML = document.querySelector("table tbody").innerHTML +
-                            '<tr><td>'+contactStore.getList()[index].name+'</td><td>'+contactStore.getList()[index].firstname+'</td><td>';
+                            '<tr><td>'+contactList[index].name+'</td><td>'+contactList[index].firstname+'</td><td>'+contactList[index].date+'</td><td>'
+                            +contactList[index].adress+'</td><td>'+contactList[index].mail+'</td><td>';
               }
             
         }
