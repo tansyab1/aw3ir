@@ -17,8 +17,8 @@ $(document).ready(function () {
             localStorage.setItem("form_email",$("#email").val());
             contactStore.add($("#nom").val(),$("#prenom").val(),$("#naissance").val(),$("#adresse").val(),$("#email").val())
             contactList=contactStore.getList();
+            $('table tbody').empty();
             for(var index in contactList){
-                //console.log(contactList[index].name);
                 document.querySelector("table tbody").innerHTML = document.querySelector("table tbody").innerHTML +
                             '<tr><td>'+contactList[index].name+'</td><td>'+contactList[index].firstname+'</td><td>'+contactList[index].date+'</td><td>'
                             +contactList[index].adress+'</td><td>'+contactList[index].mail+'</td><td>';
