@@ -43,7 +43,7 @@ $(document).ready(function () {
 
     $("#naissance").datepicker({
         dateFormat: "dd/mm/yy",
-        maxDate: 0,
+        maxDate: 31,
         onClose: function(){
             $("#CarNai").text($("#naissance").val().length + " car.");
         }
