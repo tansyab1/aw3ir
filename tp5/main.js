@@ -14,20 +14,20 @@ window.onload = function () {
 
             // liste des villes saisies, initialiser avec Paris
             cityList: [{
-                name : 'Paris'
+                name: ''
             }],
 
             // cityWeather contiendra les données météo reçus par openWeatherMap
-            cityWeather : null,
+            cityWeather: null,
 
             // indicateur de chargement
-            cityWeatherLoading : false
+            cityWeatherLoading: false
         },
 
         // 'mounted' est exécuté une fois l'application VUE totalement disponible
         // Plus d'info. sur le cycle de vie d'une app VUE : 
         // https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
-        mounted : function(){
+        mounted: function () {
             this.loaded = true;
             this.readData();
         },
@@ -42,16 +42,65 @@ window.onload = function () {
             },
             addCity: function (event) {
                 event.preventDefault(); // pour ne pas recharger la page à la soumission du formulaire
-				this.cityList.push({name : this.formCityName});
-                console.log('formCityName:',this.formCityName);
-                // A compléter dans la suite du TP  
+
+                console.log('formCityName:', this.formCityName);
+                // A compléter dans la suite du TP 
+                if (this.isCityExist(this.formCityName)) {
+                    this.messageForm = 'existe déjà';
+                }
+                else {
+                    this.cityList.push({ name: this.formCityName });
+
+                    // remise à zero du message affiché sous le formulaire
+                    this.messageForm = '';
+
+                    // remise à zero du champ de saisie
+                    this.formCityName = '';
+                }
             },
-            remove: function (_city) {      
-                // A compléter dans la suite du TP          
-            }, 
-            meteo: function (_city) {  
-                // A compléter dans la suite du TP              
+            remove: function (_city) {
+                // A compléter dans la suite du TP   
+                this.cityList = this.cityList.filter(item => item.name != _city.name);
+            },
+
+            meteo: function (_city) {
+                // A compléter dans la suite du TP    
+                this.cityWeatherLoading = true;
+
+                // appel AJAX avec fetch
+                fetch('https://api.openweathermap.org/data/2.5/weather?q=' + _city.name + '&units=metric&lang=fr&apikey=6e206da30b8de78ec5a9fce20230a774')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        app.cityWeatherLoading = false;
+
+                        // test du code retour
+                        // 200 = OK
+                        // 404 = city not found 
+                        if (json.cod === 200) {
+                            // on met la réponse du webservice dans la variable cityWeather
+                            app.cityWeather = json;
+                            app.message = null;
+                        }
+                        else {
+                            app.cityWeather = null;
+                            app.message = 'Météo introuvable pour ' + _city.name
+                                + ' (' + json.message + ')';
+                        }
+                    })
+            }
+
+        ,
+        isCityExist: function (_cityName) {
+            if (this.cityList.filter(item =>
+                item.name.toUpperCase() == _cityName.toUpperCase()
+            ).length > 0) {
+                return true;
+            } else {
+                return false;
             }
         }
+    }
     });
 }
