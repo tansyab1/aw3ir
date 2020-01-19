@@ -9,85 +9,102 @@
 	<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css">
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="vue.js"></script>
 	<style>
-		div.result {
-			display: none;
+		body {
+			background-color: #eeeff1;
+			font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+			font-size: 16px;
+			margin: 0 auto;
+			max-width: 1000px;
+			background-image: url("./background.jpg");
+
 		}
 	</style>
 </head>
 
 <body>
+	<h1 style="text-align: center;">TP5 Weather Forecast<br><br> </h1>
+
 	<div id="weatherApp">
-		<h1 style="text-align:center"> Weather Forecast </h1>
-		<div class="row">
-			<div class="col-sm-offset-3 col-lg-6">
-				<!-- formulaire de saisie de ville -->
-				<form v-on:submit="addCity">
-					<div class="input-group">
-						<input type="search" class="form-control" v-model="formCityName" placeholder="Search for..."
-							aria-label="Search for..." autofocus required>
-						<span class="input-group-btn">
-							<button class="btn btn-primary" type="submit">Go!</button>
-						</span>
-					</div>
-
-					<!-- affichage de nombre de caractères saisie -->
-					<small class="text-muted">
-						{{formCityName.length}} car.
-					</small>
-
-					<div class="alert alert-danger" role="alert" v-if='messageForm != ""'>
-						{{messageForm}}
-					</div>
-				</form>
-				<!-- Listing des villes, boucle sur l'array : cityList -->
-				<h4>Liste des villes ({{cityList.length}})</h4>
-				<ul class="list-group">
-					<a v-for="city in cityList" v-on:click="meteo(city)"
-						class="list-group-item d-flex justify-content-between align-items-center">
-						{{city.name}}
-						<button v-on:click="remove(city)" class="btn btn-secondary btn-sm"
-							title="Supprimer de la liste">&times;</button>
-					</a>
-				</ul>
-
-				<div class="alert alert-primary" role="alert" v-if="cityList.length==0">
-					Aucune ville de saisie!
-				</div>
+		<!-- ici votre code HTML utilisé par VUE -->
+		<form v-on:submit="addCity">
+			<div class="input-group">
+				<input type="search" class="form-control" v-model="formCityName" placeholder="Search for..."
+					aria-label="Search for..." autofocus required>
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">Go!</button>
+				</span>
 			</div>
+
+			<!-- affichage de nombre de caractères saisie -->
+			<small class="text-muted">
+				{{formCityName.length}} car.
+			</small>
+
+			<div class="alert alert-danger" role="alert" v-if='messageForm != ""'>
+				{{messageForm}}
+			</div>
+		</form>
+		<h4>Liste des villes ({{cityList.length}})</h4>
+		<ul class="list-group">
+			<a v-for="city in cityList" v-on:click="meteo(city)"
+				class="list-group-item d-flex justify-content-between align-items-center">
+				{{city.name}}
+				<button v-on:click="remove(city)" class="btn btn-secondary btn-sm"
+					title="Supprimer de la liste">&times;</button>
+			</a>
+		</ul>
+
+		<div class="alert alert-primary" role="alert" v-if="cityList.length==0">
+			Aucune ville de saisie!
 		</div>
 
-		<div class="result" style="text-align:center" id="result">
-			<div class="col-sm-offset-3 col-lg-6">
-				<!-- <h1 style="text-align:center" id="cityname"></h1>
-			<div style="text-align:center" id="time"></div>
-			<hr>
-			<div style="text-align:center" id="icon"></div>
-			<h3 style="text-align:center" id="temp"></h3>
-			<div style="text-align:center" id="description"></div>
-			<hr>
-			<div class="form-group">
-				<label for="humidity" class="col-sm-1 control-label" style.display="none">Humidity</label>
-				<div style="text-align:center" id="humidity"></div>
-			</div>
-			<hr>
-			<div class="form-group">
-				<label for="cloud" class="col-sm-1 control-label">Nuage</label>
-				<div style="text-align:center" id="cloud"></div>
-			</div>
-			<hr>
-			<div class="form-group">
-				<label for="wind" class="col-sm-1 control-label">Vent</label>
-				<div style="text-align:center" id="wind"></div>
-			</div>
-			<hr>
-			<div style="text-align:center" id="mapholder"></div> -->
-				<div style="text-align: center;" id="weatherApp"> </div>
+		<div v-if="cityWeatherLoading"> Chargement de la météo...</div>
+
+		<div v-if="cityWeather">
+
+			<div class="card" style="width: 18rem;" v-if="cityWeather">
+				<div class="card-header">
+					{{cityWeather.name}}
+				</div>
+				<img style="width: 1000px;" class="card-img-top"
+					v-bind:src="'https://maps.googleapis.com/maps/api/staticmap?markers='+cityWeather.coord.lat+','+cityWeather.coord.lon+'&zoom=5&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg'"
+					alt="Card image cap">
+				<br><br>
+				<div class="card-body">
+					<h5 class="card-title">
+						<i v-bind:class="'wi wi-owm-day-'+cityWeather.weather[0].id"></i>
+						{{cityWeather.main.temp}} <i style="font-size: 20px;" class="wi wi-celsius"></i>
+					</h5>
+					<p style="font-size: 20px;" class="card-text">{{cityWeather.weather[0].description}}</p>
+				</div>
+				<ul style="margin-left: 100px; width: 300px; border: solid 1px black;"
+					class="list-group list-group-flush">
+					<li class="list-group-item">
+						<i class="wi wi-cloud"></i> Nuage: {{cityWeather.clouds.all}}%
+					</li>
+					<li class="list-group-item">
+						<i class="wi wi-humidity"></i> Humidité: {{cityWeather.main.humidity}}%
+					</li>
+					<li class="list-group-item">
+						<i class="wi wi-windy"></i> Vent: {{cityWeather.wind.speed}} km/h
+					</li>
+					<li class="list-group-item">
+						<i class="wi wi-sunrise"></i>
+						Levé du soleil:
+						{{new Date(cityWeather.sys.sunrise * 1000).toTimeString()}}
+					</li>
+					<li class="list-group-item">
+						<i class="wi wi-sunset"></i>
+						Couché du soleil:
+						{{new Date(cityWeather.sys.sunset * 1000).toTimeString()}}
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
-
 </body>
